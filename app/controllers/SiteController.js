@@ -8,7 +8,7 @@ class SiteController {
     books = async (req, res) => {
         let data = await Book.findAll();
         console.log(data);
-        res.send('ok');
+        res.render('book');
     }
 }
 

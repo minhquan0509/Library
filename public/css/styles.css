@@ -24,14 +24,19 @@ body{
     line-height: 1.6;
 }
 
-.container{
-    /* max-width: 1440px; */
-    padding-right: 80px;
-    padding-left: 80px;
-
+.navbar{
+    letter-spacing: 4px;
 }
 
-.navbar{
+.nav-item{
+    margin: 0 10px;
+}
+
+.navbar-brand{
+    font-weight: 500;
+}
+
+/* .navbar{
     position: fixed;
     width: 100%;
     letter-spacing: 5px;
@@ -44,6 +49,9 @@ body{
     padding-top: 10px;
     padding-bottom: 10px;
     background-color: #f0f5f5;
+
+    padding-right: 80px;
+    padding-left: 80px;
     
 }
 
@@ -67,10 +75,9 @@ body{
 
 .navbar-menu-item:hover > a{
     color: #b3cce6;
-}
+} */
 .content{
-    padding-top: 40px;
-    min-height: calc(100vh - 40px);
+    min-height: calc(100vh - 100px);
 }
 
 .footer{
@@ -78,5 +85,13 @@ body{
     text-align: center;
     padding: 10px 0;
     background-color: #9fbfdf;
-    bottom: 0;
+}
+
+.footer-desc{
+    margin-bottom: 0;
+}
+
+.card-img-book{
+    max-height: 200px;
+    object-fit: contain;
 }
