@@ -1,29 +1,29 @@
 const {Sequelize,DataTypes,Model} = require('sequelize');
-class Book extends Model {}
+class User extends Model {}
 
-Book.init({
+User.init({
     // Model attributes are defined here
-    bookID:{
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false,
         primaryKey: true
     },
-    title: {
+    password: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    author: {
-        type: DataTypes.STRING
-        // allowNull defaults to true
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     // Other model options go here
     sequelize, // We need to pass the connection instance
-    modelName: 'Book', // We need to choose the model name
+    modelName: 'User', // We need to choose the model name
     createdAt: false,
 
   // If don't want updatedAt
     updatedAt: false,
 });
 
-module.exports = sequelize.models.Book;
+module.exports = sequelize.models.User;
