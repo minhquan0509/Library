@@ -76,11 +76,16 @@ body{
 .navbar-menu-item:hover > a{
     color: #b3cce6;
 } */
+.container{
+    /* padding: 0 40px; */
+}
+
 .content{
     min-height: calc(100vh - 100px);
 }
 
 .footer{
+    position: relative;
     width: 100%;
     text-align: center;
     padding: 10px 0;
@@ -89,6 +94,18 @@ body{
 
 .footer-desc{
     margin-bottom: 0;
+}
+
+.logout-form{
+    display: inline-block;
+    position: absolute;
+    /* float: right; */
+    right: 100px;
+    top: 3px;
+}
+
+.btn-logout{
+    font-size: inherit;
 }
 
 .card-img-book{

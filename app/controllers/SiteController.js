@@ -10,6 +10,10 @@ class SiteController {
         console.log(data);
         res.render('book');
     }
+
+    borrow(req, res){
+        res.render('borrow');
+    }
 }
 
 module.exports = new SiteController;

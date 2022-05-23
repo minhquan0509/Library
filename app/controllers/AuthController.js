@@ -23,18 +23,40 @@ class AuthController {
             console.log(err);
         }
     }
+
+    static generateAccessToken(user) {
+        return jwt.sign({
+            email: user.email
+        },
+        process.env.JWT_SECRET_KEY,
+        {expiresIn: '3h'});
+    }
+
     async login(req, res) {
         try {
             const user = await User.findByPk(req.body.email);
+            console.log(user);
             if(!user) return res.send('Wrong username!');
             const isValidPassword = await bcrypt.compare(req.body.password, user.password);
             if(!isValidPassword) return res.send('Wrong password!');
             if(isValidPassword && user) {
-                return res.redirect('home'); // need to add JWT verify
+                const token = AuthController.generateAccessToken(user);
+                // console.log(token);
+                res.cookie('token', token,{
+                    httpOnly: true,
+                    secure: false,
+                    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN*60*60*1000) //3 hours
+                })
+                res.redirect('/');
             }
         } catch (error) {
             console.log(error);
         }
+    }
+
+    logout(req, res){
+        res.clearCookie('token');
+        res.redirect('login');
     }
 
 }
