@@ -5,7 +5,7 @@ const authController = require('../app/controllers/AuthController');
 const middlewareController = require('../app/controllers/MiddlewareController');
 
 router.get('/borrow', middlewareController.verifyToken, siteController.borrow);
-router.use('/books', siteController.books);
+router.use('/about', siteController.about);
 router.use('/', siteController.home);
 
 module.exports = router;

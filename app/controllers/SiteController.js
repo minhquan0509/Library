@@ -5,10 +5,8 @@ class SiteController {
         res.render('home');
     }
 
-    books = async (req, res) => {
-        let data = await Book.findAll();
-        console.log(data);
-        res.render('book');
+    about(req, res){
+        res.render('about');
     }
 
     borrow(req, res){

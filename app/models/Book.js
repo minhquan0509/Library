@@ -1,4 +1,5 @@
 const {Sequelize,DataTypes,Model} = require('sequelize');
+const {sequelize} = require('../config/db/index.js');
 class Book extends Model {}
 
 Book.init({
@@ -13,6 +14,14 @@ Book.init({
         allowNull: false
     },
     author: {
+        type: DataTypes.STRING
+        // allowNull defaults to true
+    },
+    description: {
+        type: DataTypes.STRING
+        // allowNull defaults to true
+    },
+    imageLink: {
         type: DataTypes.STRING
         // allowNull defaults to true
     }

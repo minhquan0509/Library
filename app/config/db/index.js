@@ -13,6 +13,8 @@ async function connect(){
         console.error('Unable to connect to the database:', error);
       }
 }
-
-module.exports = sequelize;
-global.sequelize = sequelize;
+const db = {};
+db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+db.connect = connect;
+module.exports = db;
