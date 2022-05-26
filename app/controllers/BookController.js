@@ -12,6 +12,9 @@ class BookController{
         console.log(book);
         res.render('details',{book});
     }
+    create = (req, res) =>{
+        res.send('ok');
+    }
 }
 
 module.exports = new BookController ;

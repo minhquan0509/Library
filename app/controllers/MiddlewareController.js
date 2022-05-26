@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 class MiddlewareController{
-    verifyToken(req, res, next){
+    verifyToken(req, res, next) {
         const token = req.cookies.token;
         if(token){  //already logged in
 
@@ -14,6 +15,16 @@ class MiddlewareController{
         }
         else{       //user not login yet
             res.json('You are not login yet');
+        }
+    }
+
+    async verifyAdmin (req, res, next){
+        const user = await User.findOne({ where: { email: req.user.email } });
+        console.log(user);
+        if(user.isAdmin === true){
+            next();
+        } else{
+            res.status(403).json('You are not allow to do that action');
         }
     }
 }
