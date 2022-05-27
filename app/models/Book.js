@@ -21,9 +21,17 @@ Book.init({
         type: DataTypes.STRING
         // allowNull defaults to true
     },
+    numOfCopies: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    },
     imageLink: {
         type: DataTypes.STRING
         // allowNull defaults to true
+    },
+    status:{
+        type: DataTypes.STRING,
+        defaultValue: 'Available'
     }
 }, {
     // Other model options go here

@@ -24,6 +24,26 @@ body{
     line-height: 1.6;
 }
 
+.side-menu{
+    position: fixed;
+    margin-top: 60px;
+    height: calc(100vh - 60px - 45px);
+    z-index: 1;
+    left: -280px;
+    transition: all 1s;
+}
+
+.enter{
+    left: 0px !important;
+}
+
+.menu-icon{
+    position: absolute;
+    display: inline-block;
+    font-size: 24px;
+    padding: 10px;
+}
+
 .navbar{
     letter-spacing: 4px;
 }
@@ -35,47 +55,6 @@ body{
 .navbar-brand{
     font-weight: 500;
 }
-
-/* .navbar{
-    position: fixed;
-    width: 100%;
-    letter-spacing: 5px;
-    color: black;
-}
-
-.navbar-container{
-    display: flex;
-    justify-content: space-between;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #f0f5f5;
-
-    padding-right: 80px;
-    padding-left: 80px;
-    
-}
-
-.navbar-auth{
-    margin-left: auto;
-}
-
-.navbar-logo{
-    font-weight: 600;
-}
-
-.navbar-menu{
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-}
-
-.navbar-menu-item:not(:first-child){
-    margin-left: 60px;
-}
-
-.navbar-menu-item:hover > a{
-    color: #b3cce6;
-} */
 .container{
     /* padding: 0 40px; */
 }
