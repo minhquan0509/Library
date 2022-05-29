@@ -1,4 +1,5 @@
 const Book = require('../models/Book');
+const Loan = require('../models/Loan');
 const { Sequelize, DataTypes, Model } = require('sequelize');
 class SiteController {
     home(req, res){
@@ -9,8 +10,9 @@ class SiteController {
         res.render('about');
     }
 
-    borrow(req, res){
-        res.render('borrow');
+    borrow = async (req, res) => {
+        const loans = await Loan.findAll();
+        res.render('borrow',{loans});
     }
 }
 

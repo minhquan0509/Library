@@ -55,9 +55,6 @@ body{
 .navbar-brand{
     font-weight: 500;
 }
-.container{
-    /* padding: 0 40px; */
-}
 
 .content{
     min-height: calc(100vh - 100px);

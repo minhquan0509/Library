@@ -4,7 +4,7 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 class BookController{
     books = async (req, res) => {
         let data = await Book.findAll();
-        console.log(data);
+        // console.log(data);
         res.render('book',{data: data});
     }
     render = async (req, res) => {
@@ -13,7 +13,21 @@ class BookController{
         res.render('details',{book});
     }
     create = (req, res) =>{
-        res.send('ok');
+        res.render('createBook');
+    }
+
+    createBook = async (req, res) =>{
+        const book = await Book.create({
+            bookID: req.body.bookID,
+            title: req.body.title,
+            author: req.body.author,
+            description: req.body.description,
+            numOfCopies: req.body.numOfCopies,
+            imageLink: req.body.imageLink,
+            status: req.body.status,
+        });
+
+        res.redirect('/books');
     }
 }
 
