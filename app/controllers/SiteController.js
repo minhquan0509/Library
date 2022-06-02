@@ -9,11 +9,6 @@ class SiteController {
     about(req, res){
         res.render('about');
     }
-
-    borrow = async (req, res) => {
-        const loans = await Loan.findAll();
-        res.render('borrow',{loans});
-    }
 }
 
 module.exports = new SiteController;

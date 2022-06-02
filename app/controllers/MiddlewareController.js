@@ -9,7 +9,7 @@ class MiddlewareController{
             jwt.verify(accessToken,process.env.JWT_SECRET_KEY, (err, user) => {
                 if(err) return res.status(403).json('Token is not valid');
                 req.user = user;
-                console.log(user);
+                // console.log(user);
                 next();
             })
         }
@@ -20,7 +20,7 @@ class MiddlewareController{
 
     async verifyAdmin (req, res, next){
         const user = await User.findOne({ where: { email: req.user.email } });
-        console.log(user);
+        // console.log(user);
         if(user.isAdmin === true){
             next();
         } else{

@@ -35,6 +35,8 @@ Loan.init({
     },
     returnDate: {
         type: DataTypes.DATE,
+        allowNull: true,
+
     },
     status: {
         type: DataTypes.ENUM,
