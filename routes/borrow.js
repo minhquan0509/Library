@@ -6,6 +6,7 @@ const middlewareController = require('../app/controllers/MiddlewareController');
 
 // router.get('/create', middlewareController.verifyToken, middlewareController.verifyAdmin, borrowController.create);
 router.post('/create', middlewareController.verifyToken, middlewareController.verifyAdmin, borrowController.create);
+router.post('/edit', middlewareController.verifyToken, middlewareController.verifyAdmin, borrowController.edit);
 router.get('/', middlewareController.verifyToken, middlewareController.verifyAdmin, borrowController.borrow);
 
 module.exports = router;
