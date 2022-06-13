@@ -40,7 +40,17 @@ class BorrowController {
         // })
         // res.redirect('/borrow');
         console.log(req.body);
-        const loan = await sequelize.query(`UPDATE loans set ` + req.body.fieldName + ` = '` + req.body.value + `' where ID = ` + req.body.ID, { type: QueryTypes.UPDATE });
+        const loan = await sequelize.query(`UPDATE loans set userEmail = '` + req.body.userEmail + `', issueDate = '`+ req.body.issueDate +`', dueDate = '`+ req.body.dueDate +`', returnDate = '`+ req.body.returnDate +`', status = '`+ req.body.status +`' where ID = ` + req.body.ID, { type: QueryTypes.UPDATE });
+        res.status(200);
+    }
+
+    delete = async (req, res) => {
+        await Loan.destroy({
+            where:{
+                ID: req.params.loanID
+            }
+        });
+        res.redirect('/borrow');
     }
 }
 

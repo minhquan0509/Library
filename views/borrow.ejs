@@ -54,7 +54,7 @@
                 <th scope="col">Due Date</th>
                 <th scope="col">Return Date</th>
                 <th scope="col">Status</th>
-                <th scope="col"></th>
+                <th scope="col">Action</th>
 
             </tr>
         </thead>
@@ -68,54 +68,14 @@
                 <td class="edit" contenteditable="true" id="dueDate_<%= loan.ID %>"><%= loan.dueDate %></td>
                 <td class="edit" contenteditable="true" id="returnDate_<%= loan.ID %>"><%= loan.returnDate %></td>
                 <td class="edit" contenteditable="true" id="status_<%= loan.ID %>"><%= loan.status %></td>
-                <td contenteditable="true"><a href="" class="save"></a></td>
+                <td><button type="button" class="btn btn-danger btn-delete" id="deleteBtn_<%= loan.ID %>">Delete</button>
+                    <button class="btn btn-success btn-save" id="saveBtn_<%= loan.ID %>">Save</button></td>
             </tr>
             <%}); %>
         </tbody>
-        <button class="btn btn-success btn-save">Save</button>
     </table>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script>
-    const itemsToBeSubmitted = [];
-    $(".edit").focusout(function(){
-        const splitArr = this.id.split('_');
-        let fieldName = splitArr[0];
-        let ID = splitArr[1];
-        let value = $(this).text();
-
-        // itemsToBeSubmitted.push({
-        //   fieldName: fieldName,
-        //   ID: ID,
-        //   value: value
-        // });
-        $.ajax({
-            url: 'borrow/edit',
-            type: 'post',
-            data: {
-              fieldName,
-              ID,
-              value
-            },  // edited items
-            dataType:'json',
-            success: (response) => {
-                console.log('Saved successfully');
-            }
-        });
-        console.log(itemsToBeSubmitted);
-    });
-
-    document.querySelector('.btn-save').addEventListener('click', function() {
-        $.ajax({
-            url: 'borrow/edit',
-            type: 'post',
-            data: JSON.stringify(itemsToBeSubmitted),  // edited items
-            dataType:'json',
-            success: (response) => {
-                console.log('Saved successfully');
-            }
-        });
-    });
-</script>
+<script src="/js/borrow.js"></script>
 <%- include('partials/footer'); -%>
