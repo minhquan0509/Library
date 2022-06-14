@@ -5,8 +5,12 @@ const {sequelize} = require('../config/db/index');
 
 class BorrowController {
     borrow = async (req, res) => {
-        const loans = await Loan.findAll();
-        res.render('borrow',{loans});
+        try{
+            const loans = await Loan.findAll();
+            res.render('borrow',{loans});
+        } catch(err){
+            res.send(err);
+        }
     }
 
     create = async (req, res) => {
@@ -18,14 +22,18 @@ class BorrowController {
         //     returnDate: req.body.returnDate,
         // }
         // console.log(loan);
-        const loan = await Loan.create({
-            userEmail: req.body.email,
-            bookID: req.body.bookID,
-            issueDate: req.body.issueDate,
-            dueDate: req.body.dueDate,
-            // returnDate: req.body.returnDate,
-
-        })
+        try {
+            
+            const loan = await Loan.create({
+                userEmail: req.body.email,
+                bookID: req.body.bookID,
+                issueDate: req.body.issueDate,
+                dueDate: req.body.dueDate,
+                // returnDate: req.body.returnDate,
+            })
+        } catch (error) {
+            res.send(error);
+        }
         res.redirect('/borrow');
     }
 
@@ -39,17 +47,25 @@ class BorrowController {
 
         // })
         // res.redirect('/borrow');
-        console.log(req.body);
-        const loan = await sequelize.query(`UPDATE loans set userEmail = '` + req.body.userEmail + `', issueDate = '`+ req.body.issueDate +`', dueDate = '`+ req.body.dueDate +`', returnDate = '`+ req.body.returnDate +`', status = '`+ req.body.status +`' where ID = ` + req.body.ID, { type: QueryTypes.UPDATE });
-        res.status(200);
+        try {
+            console.log(req.body);
+            const loan = await sequelize.query(`UPDATE loans set userEmail = '` + req.body.userEmail + `', issueDate = '`+ req.body.issueDate +`', dueDate = '`+ req.body.dueDate +`', returnDate = '`+ req.body.returnDate +`', status = '`+ req.body.status +`' where ID = ` + req.body.ID, { type: QueryTypes.UPDATE });
+            res.status(200);
+        } catch (error) {
+            res.send(error);
+        }
     }
 
     delete = async (req, res) => {
-        await Loan.destroy({
-            where:{
-                ID: req.params.loanID
-            }
-        });
+        try {
+            await Loan.destroy({
+                where:{
+                    ID: req.params.loanID
+                }
+            });
+        } catch (error) {
+            res.send(error);
+        }
         res.redirect('/borrow');
     }
 }

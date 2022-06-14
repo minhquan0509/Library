@@ -1,5 +1,13 @@
 <%- include('partials/header'); -%>
 <div class="container content">
+  <form action="/books/search">
+  <div class="input-group mb-3 rounded w-50">
+      <input type="text" class="form-control rounded" placeholder="Search" aria-label="Search" name="title"/>
+      <button id="search-button" type="submit" class="btn btn-primary">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </form>
   <div class="row">
     <% data.forEach((book)=>{ %>
     <div class="col-3">
