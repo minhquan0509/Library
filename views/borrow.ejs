@@ -1,7 +1,9 @@
 <%- include('partials/header'); -%>
 <div class="content container">
     <h1>Borrow page</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form"><i class="fa-solid fa-plus"></i> New</button>
+    <% if(isAdmin === true ){ %>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form"><i class="fa-solid fa-plus"></i> New</button>
+    <%}%>
 
 <!-- Modal -->
 <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,8 +56,9 @@
                 <th scope="col">Due Date</th>
                 <th scope="col">Return Date</th>
                 <th scope="col">Status</th>
-                <th scope="col">Action</th>
-
+                <% if(isAdmin === true ){ %>
+                  <th scope="col">Action</th>
+                <%}%>
             </tr>
         </thead>
         <tbody>
@@ -64,12 +67,21 @@
                 <th scope="row" id="ID_<%= loan.ID %>"><%= loan.ID %></th>
                 <td class="edit" contenteditable="true" id="userEmail_<%= loan.ID %>"><%= loan.userEmail %></td>
                 <td class="edit" contenteditable="true" id="bookID_<%= loan.ID %>"><%= loan.bookID %></td>
-                <td class="edit" contenteditable="true" id="issueDate_<%= loan.ID %>"><%= loan.issueDate %></td>
-                <td class="edit" contenteditable="true" id="dueDate_<%= loan.ID %>"><%= loan.dueDate %></td>
-                <td class="edit" contenteditable="true" id="returnDate_<%= loan.ID %>"><%= loan.returnDate %></td>
-                <td class="edit" contenteditable="true" id="status_<%= loan.ID %>"><%= loan.status %></td>
+                <td class="edit" id=""><input type="date" id="issueDate_<%= loan.ID %>" placeholder="Select date" name="issueDate" value="<%= loan.issueDate %>"></td>
+                <td class="edit" id=""><input type="date" id="dueDate_<%= loan.ID %>" placeholder="Select date" name="dueDate" value="<%= loan.dueDate %>"></td>
+                <td class="edit" id=""><input type="date" id="returnDate_<%= loan.ID %>" placeholder="Select date" name="returnDate" value="<%= loan.returnDate %>"></td>
+                <td class="edit" contenteditable="true" id="status_<%= loan.ID %>">
+                  <select class="form-select">
+                    <option selected><%= loan.status %></option>
+                    <option value="1">On progress</option>
+                    <option value="2">Done</option>
+                    <option value="3">Cancelled</option>
+                  </select>
+                  </td>
+                <% if(isAdmin === true ){ %> 
                 <td><button type="button" class="btn btn-danger btn-delete" id="deleteBtn_<%= loan.ID %>">Delete</button>
                     <button class="btn btn-success btn-save" id="saveBtn_<%= loan.ID %>">Save</button></td>
+                <%}%>
             </tr>
             <%}); %>
         </tbody>

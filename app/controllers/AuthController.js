@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 class AuthController {
     async register(req, res) {
-        console.log(req.body.email, req.body.password);
         try{
             const user = await User.findByPk(req.body.email);
             if(user){
@@ -26,7 +25,8 @@ class AuthController {
 
     static generateAccessToken(user) {
         return jwt.sign({
-            email: user.email
+            email: user.email,
+            isAdmin: user.isAdmin
         },
         process.env.JWT_SECRET_KEY,
         {expiresIn: '3h'});

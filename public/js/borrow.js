@@ -7,9 +7,9 @@ const saveButtons = document.querySelectorAll('.btn-save');
           ID: ID,
           userEmail: document.getElementById(`userEmail_${ID}`).innerText,
           bookID: document.getElementById(`bookID_${ID}`).innerText,
-          issueDate: document.getElementById(`issueDate_${ID}`).innerText,
-          dueDate: document.getElementById(`dueDate_${ID}`).innerText,
-          returnDate: document.getElementById(`returnDate_${ID}`).innerText,
+          issueDate: document.getElementById(`issueDate_${ID}`).value,
+          dueDate: document.getElementById(`dueDate_${ID}`).value,
+          returnDate: document.getElementById(`returnDate_${ID}`).value,
           status: document.getElementById(`status_${ID}`).innerText
         }
         console.log(loan);

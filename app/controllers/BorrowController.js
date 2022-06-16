@@ -6,8 +6,10 @@ const {sequelize} = require('../config/db/index');
 class BorrowController {
     borrow = async (req, res) => {
         try{
+            console.log(req.user.isAdmin);
+            const isAdmin = req.user.isAdmin;
             const loans = await Loan.findAll();
-            res.render('borrow',{loans});
+            return res.render('borrow',{loans, isAdmin});
         } catch(err){
             res.send(err);
         }
