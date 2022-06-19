@@ -1,5 +1,6 @@
 const Book = require('../models/Book');
 const { Sequelize, DataTypes, Model } = require('sequelize');
+const { sequelize } = require('../config/db');
 const Op = Sequelize.Op;
 
 class BookController{
@@ -53,6 +54,16 @@ class BookController{
                 }
             })
             res.status(200).render('book',{data});
+        } catch (error) {
+            res.send(error);
+        }
+    }
+
+    edit = async(req, res) => {
+        try {
+            const numOfCopies = req.body.numOfCopies;
+            await sequelize.query(`UPDATE books set numOfCopies = ${numOfCopies} where bookID = ${req.body.bookID}`)
+            res.redirect(`/books/${req.body.bookID}`);
         } catch (error) {
             res.send(error);
         }

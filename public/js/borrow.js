@@ -10,7 +10,7 @@ const saveButtons = document.querySelectorAll('.btn-save');
           issueDate: document.getElementById(`issueDate_${ID}`).value,
           dueDate: document.getElementById(`dueDate_${ID}`).value,
           returnDate: document.getElementById(`returnDate_${ID}`).value,
-          status: document.getElementById(`status_${ID}`).innerText
+          status: document.getElementById(`status_${ID}`).value
         }
         console.log(loan);
         $.ajax({

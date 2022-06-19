@@ -8,16 +8,17 @@
         </div>
 
         <div class="col-md-4">
+        <form action="/books/edit" method="post">
             <small>Author: <%= book.author %></small>
             <h3 class="my-3">Book Description</h3>
             <p><%= book.description %></p>
-            <h3 class="my-3">Categories</h3>
-            <ul>
-                <li>Lorem Ipsum</li>
-                <li>Dolor Sit Amet</li>
-                <li>Consectetur</li>
-                <li>Adipiscing Elit</li>
-            </ul>
+            <div class="form-group col-md-6">
+                <label for="inputStatus">Quantity</label>
+                <input type="number" class="form-control" value="<%= book.numOfCopies %>" name="numOfCopies" min="0">
+            </div>
+            <input type="text" name="bookID" id="" value="<%= book.bookID %>" class="d-none" >
+        <button type="submit" class="btn btn-primary mt-4">Save</button>
+
         </div>
 
     </div>
