@@ -23,7 +23,8 @@ class AuthController {
         }
     }
 
-    static generateAccessToken(user) {
+    //private method
+    static #generateAccessToken(user) {
         return jwt.sign({
             email: user.email,
             isAdmin: user.isAdmin
@@ -40,7 +41,7 @@ class AuthController {
             const isValidPassword = await bcrypt.compare(req.body.password, user.password);
             if(!isValidPassword) return res.send('Wrong password!');
             if(isValidPassword && user) {
-                const token = AuthController.generateAccessToken(user);
+                const token = AuthController.#generateAccessToken(user);
                 // console.log(token);
                 res.cookie('token', token,{
                     httpOnly: true,

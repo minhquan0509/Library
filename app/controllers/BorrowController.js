@@ -57,6 +57,7 @@ class BorrowController {
                     // returnDate: req.body.returnDate,
                     status: 'progressing'
                 })
+                await sequelize.query(`UPDATE books set numOfCopies = numOfCopies - 1 where bookID = ${req.body.bookID}`)
                 res.redirect('/borrow');
             }
         } catch (error) {
@@ -76,7 +77,11 @@ class BorrowController {
         // res.redirect('/borrow');
         try {
             console.log(req.body);
-            const loan = await sequelize.query(`UPDATE loans set issueDate = '${req.body.issueDate}', dueDate = '${req.body.dueDate}', returnDate = '${req.body.returnDate}', status = '${req.body.status}' where ID = ${req.body.ID}`, { type: QueryTypes.UPDATE });
+            if(req.body.returnDate === null){
+                const loan = await sequelize.query(`UPDATE loans set issueDate = '${req.body.issueDate}', dueDate = '${req.body.dueDate}', returnDate = '${req.body.returnDate}', status = '${req.body.status}' where ID = ${req.body.ID}`, { type: QueryTypes.UPDATE });
+            } else{
+                const loan = await sequelize.query(`UPDATE loans set issueDate = '${req.body.issueDate}', dueDate = '${req.body.dueDate}', status = '${req.body.status}' where ID = ${req.body.ID}`, { type: QueryTypes.UPDATE });
+            }
             if(req.body.status === 'done')
             await sequelize.query(`UPDATE books set numOfCopies = numOfCopies + 1 where bookID = ${req.body.bookID}`);
             res.status(200);

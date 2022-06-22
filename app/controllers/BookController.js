@@ -45,12 +45,33 @@ class BookController{
 
     searchBook = async (req, res) => {
         try {         
-            const title = req.query.title;
+            const search = req.query.search;
             const data = await Book.findAll({
+                // where:{
+                //     title: {
+                //         [Op.like]: `%${title}%`
+                //     }
+                // }
+                //where title like '%search% or author like '%search%' or description like '%search%'
                 where:{
-                    title: {
-                        [Op.like]: `%${title}%`
-                    }
+                    [Op.or]: [
+                        {
+                            title: {
+                                [Op.like]: `%${search}%`
+                            }
+                        },
+                        {
+                            author: {
+                                [Op.like]: `%${search}%`
+                            }
+                        },
+                        {
+                            description: {
+                                [Op.like]: `%${search}%`
+                            }
+                        }
+                    ]
+                    
                 }
             })
             res.status(200).render('book',{data});
